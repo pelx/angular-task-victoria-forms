@@ -1,0 +1,44 @@
+<mat-card>
+	<h1>Item</h1>
+	<form form-group="itemForm">
+		<mat-form-field>
+			<input matInput placeholder="Id">
+  </mat-form-field>
+<br>
+		<mat-form-field>
+			<input matInput placeholder="First Name">
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+			<input matInput placeholder="Last Name">
+  </mat-form-field>
+  <br>
+   <mat-form-field>
+     <mat-select placeholder="Gender">
+      <mat-option *ngFor="let g of gender" [value]="g.code">
+        {{g.value}}
+      </mat-option>
+    </mat-select>
+			<!-- <input matInput placeholder="Gender"> -->
+
+  </mat-form-field>
+   <br>
+  <mat-form-field>
+			<input matInput placeholder="Email Address">
+  </mat-form-field>
+  <br>
+  
+  <br>
+  <mat-form-field>
+			<input matInput placeholder="Color">
+  </mat-form-field>
+  <br>
+ {{message}}
+  <button [routerLink]="['**']" mat-flat-button color="warn"
+   <!-- (click)="newMessage()" -->
+   ><mat-icon color="white">Home</mat-icon> Home
+ </button>
+
+
+  </form>
+</mat-card>
