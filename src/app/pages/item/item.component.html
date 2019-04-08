@@ -1,42 +1,41 @@
 <mat-card>
 	<h1>Item</h1>
-	<form form-group="itemForm">
+	<form [formGroup]="form">
 		<mat-form-field>
-			<input matInput placeholder="Id">
+			<input matInput placeholder="Id" formControlName="id">
   </mat-form-field>
 <br>
 		<mat-form-field>
-			<input matInput placeholder="First Name">
+			<input matInput placeholder="First Name" formControlName="first_name">
   </mat-form-field>
   <br>
   <mat-form-field>
-			<input matInput placeholder="Last Name">
+			<input matInput placeholder="Last Name" formControlName="last_name">
   </mat-form-field>
   <br>
    <mat-form-field>
-     <mat-select placeholder="Gender">
+     <mat-select placeholder="Gender" formControlName="gender">
       <mat-option *ngFor="let g of gender" [value]="g.code">
         {{g.value}}
       </mat-option>
     </mat-select>
-			<!-- <input matInput placeholder="Gender"> -->
-
   </mat-form-field>
    <br>
   <mat-form-field>
-			<input matInput placeholder="Email Address">
+			<input matInput placeholder="Email Address" formControlName="email">
   </mat-form-field>
   <br>
   
   <br>
   <mat-form-field>
-			<input matInput placeholder="Color">
+			<input matInput placeholder="Color" formControlName="color">
   </mat-form-field>
   <br>
- {{message}}
+  
   <button [routerLink]="['**']" mat-flat-button color="warn"
-   <!-- (click)="newMessage()" -->
-   ><mat-icon color="white">Home</mat-icon> Home
+   <!-- (click)="save()" -->
+   >
+   <mat-icon color="white">Home</mat-icon> Home
  </button>
 
 

@@ -1,42 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Gender } from '../../interfaces/gender';
 import { DataService } from '../../services/dataservice';
+import { Item } from '../../models/item';
 
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.css']
 })
-export class ItemComponent implements OnInit{
-  id:number;
-  message:string;
+export class ItemComponent implements OnInit {
+  id: number;
+  item: Item;
+  form: FormGroup;
+
   gender: Gender[] = [
     { code: "F", value: "Female" },
     { code: "M", value: "Male" },
 
   ]
-  constructor() { }
-  // constructor(private data: DataService) { }
+  constructor(private fb: FormBuilder,
+    private service: DataService) {
+    let item = service.getItem();
+    this.form = fb.group({
+      id: [item.id],
+      first_name: [item.first_name],
+      last_name: [item.last_name],
+      gender: [item.gender],
+      color: [item.color],
+      email: [item.email],
+    });
 
-  ngOnInit() {
-    // this.data.currentMessage.subscribe(message => this.message = message)
   }
 
-  
-
-  itemForm = new FormGroup({
-    id: new FormControl('0'),
-    first_name: new FormControl(''),
-    last_name: new FormControl(''),
-    gender: new FormControl(''),
-    colour: new FormControl(''),
-    email: new FormControl(''),
-  })
-
-// newMessage() {
-//     this.data.changeMessage("Hello from Sibling");
-//     console.log(this.data.changeMessage);
-//   }
-
+  ngOnInit() {
+    // this.data.currentItem.subscribe(item => this.item = item)
+  }
 }

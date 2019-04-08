@@ -1,16 +1,23 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Item } from './../models/item';
+import 'rxjs/add/operator/toPromise';
+
 
 @Injectable()
 export class DataService {
 
-  private messageSource = new BehaviorSubject('default message');
-  currentMessage = this.messageSource.asObservable();
+  _item: any;
 
-  constructor() { }
-
-  changeMessage(message: string) {
-    this.messageSource.next(message)
+  constructor(private item: object) {
+    this._item = item;
   }
 
+  getItem(id: number) {
+    return this._item.toPromise;
+  }
+
+  setItem(item: Item) {
+    //
+  }
 }

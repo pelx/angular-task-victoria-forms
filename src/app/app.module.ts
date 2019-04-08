@@ -14,7 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 
-// import { DataService } from '../../services/dataservice';
+import { DataService } from './services/dataservice';
 
 
 // import { AppRouterModule } from './app-router.module';
@@ -47,7 +47,7 @@ const appRoutes = [
       appRoutes)
   ],
   declarations: [AppComponent, TableComponent, ItemComponent],
-  // providers: [DataService],
+  providers: [DataService],
 
   bootstrap: [AppComponent]
 })
