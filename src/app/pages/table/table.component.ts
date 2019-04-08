@@ -18,7 +18,7 @@ export class TableComponent implements OnInit {
     setTimeout(() => {
     this.httpClient.get<Item[]>("assets/mock-data.json").subscribe(a => {
       this.retrievedData = a;
-      console.log('ITEMS:', a )
+      // console.log('ITEMS:', a )
       this.isFinished = true;
     });
     }, 5);

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Gender } from '../../interfaces/gender';
-import { DataService } from '../../services/dataservice';
+import { ApiData } from '../../interfaces/apidata';
 import { Item } from '../../models/item';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-item',
@@ -11,7 +14,8 @@ import { Item } from '../../models/item';
 })
 export class ItemComponent implements OnInit {
   id: number;
-  item: Item;
+  items: Map<Item, number>;
+ 	dataSource: ApiData;
   form: FormGroup;
 
   gender: Gender[] = [
@@ -20,23 +24,32 @@ export class ItemComponent implements OnInit {
 
   ]
   constructor(private fb: FormBuilder,
-    private service: DataService) {
-    let item = service.getItem();
+    private http: HttpClient,
+    private route: ActivatedRoute) {
+    this.http.get<Item[]>("assets/mock-data.json").subscribe(a => {
+      this.dataSource = a as ApiData;
+      this.items = this.dataSource.items;
+    });
+
+    this.route.paramMap
+      .subscribe(params => {
+        this.id = +params.get('id')
+      });
+    console.log('ID:    ', this.id);
+    console.log('ITEMs', this.items[this.id]);
+    let item = this.items[this.id];
     this.form = fb.group({
       id: [item.id],
       first_name: [item.first_name],
       last_name: [item.last_name],
       gender: [item.gender],
-      color: [item.color],
+      colour: [item.colour],
       email: [item.email],
     });
 
   }
 
   ngOnInit() {
-    this.httpClient.get<Item[]>("assets/mock-data.json").subscribe(a => {
-      this.retrievedData = data;
-      console.log('ITEMS', data )
-    });
+
   }
 }

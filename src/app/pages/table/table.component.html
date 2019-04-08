@@ -1,13 +1,11 @@
 <h1>Table</h1>
 <br>
 <h1 *ngIf="!isFinished">Loading...</h1>
-<!-- {{message}} -->
 <table>
 
   <tr *ngFor="let item of retrievedData">
     <td><a [routerLink]="['/view', item.id]">{{ item.first_name }}</a></td>
     <td>{{ item.last_name }}</td>
-    
   </tr>
 
 </table>
