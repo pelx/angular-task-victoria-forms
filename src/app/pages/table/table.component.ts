@@ -10,18 +10,17 @@ import { Item } from '../../models/item';
 export class TableComponent implements OnInit {
   retrievedData: Item[] = [];
   isFinished: boolean;
-  message:Item;
 
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
     setTimeout(() => {
-    this.httpClient.get<Item[]>("assets/mock-data.json").subscribe(a => {
-      this.retrievedData = a;
-      // console.log('ITEMS:', a )
-      this.isFinished = true;
-    });
+      this.httpClient.get<Item[]>("assets/mock-data.json").subscribe(a => {
+        this.retrievedData = a;
+      });
     }, 5);
+    this.isFinished = true;
+
   }
 
 

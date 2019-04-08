@@ -5,6 +5,7 @@ import { ApiData } from '../../interfaces/apidata';
 import { Item } from '../../models/item';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import 'rxjs/add/operator/filter';
 
 
 @Component({
@@ -14,8 +15,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ItemComponent implements OnInit {
   id: number;
-  items: Map<Item, number>;
- 	dataSource: ApiData;
+  items: Item[] = [];
+  item;
+
+
+  // dataSource: ApiData;
   form: FormGroup;
 
   gender: Gender[] = [
@@ -26,9 +30,12 @@ export class ItemComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private http: HttpClient,
     private route: ActivatedRoute) {
-    this.http.get<Item[]>("assets/mock-data.json").subscribe(a => {
-      this.dataSource = a as ApiData;
-      this.items = this.dataSource.items;
+    this.http.get<Item[]>("assets/mock-data.json").subscribe(data => {
+      this.items = data;
+
+      // this.item = this.http.get<Item[]>("assets/mock-data.json").pipe(map(item => item.find(item=> item.id === this.id)));
+      // console.log('ITEMs', data);
+
     });
 
     this.route.paramMap
@@ -36,8 +43,10 @@ export class ItemComponent implements OnInit {
         this.id = +params.get('id')
       });
     console.log('ID:    ', this.id);
-    console.log('ITEMs', this.items[this.id]);
-    let item = this.items[this.id];
+
+    let item = this.items.find(item => item.id === this.id);
+        console.log('ITEM', item);
+
     this.form = fb.group({
       id: [item.id],
       first_name: [item.first_name],
