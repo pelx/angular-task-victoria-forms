@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Gender } from '../../interfaces/gender';
-import { ApiData } from '../../interfaces/apidata';
 import { Item } from '../../models/item';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
@@ -17,9 +16,6 @@ export class ItemComponent implements OnInit {
   id: number;
   items: Item[] = [];
   item;
-
-
-  // dataSource: ApiData;
   form: FormGroup;
 
   gender: Gender[] = [
@@ -45,7 +41,7 @@ export class ItemComponent implements OnInit {
     console.log('ID:    ', this.id);
 
     let item = this.items.find(item => item.id === this.id);
-        console.log('ITEM', item);
+    console.log('ITEM', item);
 
     this.form = fb.group({
       id: [item.id],
