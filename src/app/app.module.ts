@@ -47,7 +47,7 @@ const appRoutes = [
       appRoutes)
   ],
   declarations: [AppComponent, TableComponent, ItemComponent],
-  providers: [DataService],
+  // providers: [DataService],
 
   bootstrap: [AppComponent]
 })

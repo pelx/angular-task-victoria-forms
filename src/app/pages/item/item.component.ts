@@ -34,6 +34,9 @@ export class ItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.data.currentItem.subscribe(item => this.item = item)
+    this.httpClient.get<Item[]>("assets/mock-data.json").subscribe(a => {
+      this.retrievedData = data;
+      console.log('ITEMS', data )
+    });
   }
 }
